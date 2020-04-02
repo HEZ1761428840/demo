@@ -2,6 +2,6 @@
   "name": "demo",
   "version": "1.0.0",
   "dependencies": {
-    "abc": 1
+    "abc": 2
   }
 }
