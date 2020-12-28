@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .forClass{
+            color: #e5ff00;
+        }
+    </style>
+</head>
+<body>
+    <div id = "app">
+       <h1>计数器:{{counter}}</h1>
+       <button @click="add">+</button>
+       <button @click="sub">-</button>
+       <ul>
+           <button v-on:click="ischange" v-for="(item, index) in city " :class="getClass()">{{item}}</button>
+       </ul>
+       <input v-model="counter">
+       <h1 v-html="url"></h1>
+       <!-- <img :src="src" alt="">
+       <a :href="href">百度一下</a> -->
+       
+    </div>
+    <script>
+
+            const app = new Vue({
+            el:'#app',
+            data:{
+                counter: 0,
+                city:['深圳','上海','北京'],
+                url:'<a href="http://www.baidu.com">百度一下</a>',
+                src:'https://cn.vuejs.org/images/logo.png',
+                href:'http://www.baidu.com',
+                isAction: false
+            },
+            methods:{
+                add:function(){
+                    this.counter ++;
+                },
+                sub:function(){
+                    this.counter --;
+                },
+                ischange:function(){
+                     this.isAction = !this.isAction;
+                     console.log(this.isAction);
+                },
+                getClass:function(){
+                    return '{\'forClass\':' + this.isAction + '}';
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

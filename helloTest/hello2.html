@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .liColor{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div @click = "divClick">aaaaaaa
+            <button @click.stop = "btnClick">按钮1</button>
+        </div>
+        <br>
+        <form action="action">
+            <input type="submit" @click.prevent="formClick" name="提交">
+        </form>
+
+        <input type="text" @keyup.enter="keyupClick">
+        <br>
+        <span v-if="isTrue">
+            <label for="username">用户名</label>
+            <input type="text" name="username" placeholder="用户名" key = "username">
+        </span>
+        <span v-else>
+            <label for="eamil">邮箱</label>
+            <input type="text" name="email" placeholder="邮箱" key = "email">
+        </span>
+        <button @click="changeType">切换类型</button>
+        <ul>
+            <li @click="changeColor(index)"
+                v-for="(item, index) in movies"
+                :class="{liColor : line === index}">
+                {{item}}</li>
+            
+        </ul>
+    </div>
+
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                isTrue: true,
+                movies: ['海王','海贼王','神雕侠侣','倚天屠龙记'],
+                line: 0
+            },
+            methods: {
+                divClick(){
+                    console.log('divClick')
+                },
+                btnClick(){
+                    console.log('btnClikc')
+                },
+                formClick(){
+                    console.log('formClick')
+                },
+                keyupClick(){
+                    console.log("keyupClick")
+                },
+                changeType(){
+                    this.isTrue = !this.isTrue
+                },
+                changeColor(index){
+                    this.line = index
+                }
+            }
+        });
+    </script>
+</body>
+</html>

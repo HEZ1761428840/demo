@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <cpn @itemclick="cpnClick"></cpn>
+    </div>
+
+    <template id="cpn">
+        <div>
+            <button v-for="item in info"
+                    @click="btnClick(item)">
+                {{item.name}}
+            </button>
+        </div>
+    </template>
+
+    <script>
+        const cpn = {
+            template: '#cpn',
+            data(){
+                return {
+                    info:
+                        [
+                            {id:'a',name:'A'},
+                            {id:'b',name:'B'},
+                            {id:'c',name:'C'},
+                            {id:'d',name:'D'}
+                        ]
+                }
+            },
+            methods:{
+                btnClick(item){
+                    this.$emit('itemclick', item)
+                }
+            }
+        }
+
+        const app = new Vue({
+            el: '#app',
+            methods: {
+                cpnClick(item){
+                    console.log(item)
+                }
+            },
+            components: {
+                cpn
+            }
+        })
+    </script>
+</body>
+</html>

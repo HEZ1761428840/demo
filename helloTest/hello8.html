@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <cpn :number1="num1" 
+             :number2="num2"
+             @changenumber1="changeNum1"
+             @changenumber2="changeNum2"></cpn>
+    </div>
+
+    <template id="cpn">
+        <div>
+            <h1>props: {{number1}}</h1>
+            <h1>data: {{dnumber1}}</h1>
+            <input type="text" :value="dnumber1" @input="Num1Input"/>
+            <h1>props: {{number2}}</h1>
+            <h1>data: {{dnumber2}}</h1>
+            <input type="text" :value="dnumber2" @input="Num2Input"/>
+        </div>
+    </template>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                num1: 1,
+                num2: 0
+            },
+            methods:{
+                changeNum1(num){
+                    this.num1 = num
+                },
+                changeNum2(num){
+                    this.num2 = num
+                }
+            },
+            components: {
+                cpn:{
+                    template: '#cpn',
+                    props:{
+                        number1: Number,
+                        number2: Number
+                    },
+                    data(){
+                        return {
+                            dnumber1: this.number1,
+                            dnumber2: this.number2
+                        }
+                    },
+                    methods:{
+                        Num1Input(event){
+                            this.dnumber1 = event.target.value;
+                            this.$emit('changenumber1', this.dnumber1)
+                            
+                        },
+                        Num2Input(event){
+                            this.dnumber2 = event.target.value;
+                            this.$emit('changenumber2', this.dnumber2)
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

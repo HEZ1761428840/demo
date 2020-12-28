@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <cpn :cname="name"></cpn>
+        <button @click="change">点击一下</button>
+    </div>
+
+    <template id="cpn">
+        <div>
+            <div>cname: {{cname}}</div>
+            <div>Dname: {{dname}}</div>
+        </div>
+    </template>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                name: 'hwz'
+            },
+            methods:{
+                change(){
+                    this.name = 'xxx'
+                }
+            },
+            components:{
+                cpn: {
+                    template: '#cpn',
+                    props:{
+                        cname: String
+                    },
+                    data(){
+                        return {
+                            dname: this.cname
+                        }
+                    },
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+       <!--<input type="text" v-bind:value="message" v-on:input="onchange"> >--> 
+       <input type="text" :value = "message" @input="message = $event.target.value">
+        <h1>{{message}}</h1>
+        <br>
+        <div>
+            <label for="male">
+                <input type="radio" value="男" id="male" v-model="sex">男
+            </label>
+            <label for="fmale">
+                <input type="radio" value="女" id="fmale" v-model="sex">女
+            </label>
+            <h1>你当前选择的性别是：{{sex}}</h1>
+        </div>
+        <br>
+        <div>
+            <label for="hobby">
+                <input type="checkbox" id="agree" v-model="isagree">同意<br>
+                <input type="checkbox" value="篮球" v-model="hobbys">篮球<br>
+                <input type="checkbox" value="足球" v-model="hobbys">足球<br>
+                <input type="checkbox" value="羽毛球" v-model="hobbys">羽毛球<br>
+                <input type="checkbox" value="乒乓球" v-model="hobbys">乒乓球<br>
+                <button :disabled="!isagree">下一步</button>
+            </label>
+            <h1>{{hobbys}}</h1>
+        </div>
+        <br>
+        <div>
+            <label v-for="item in origanHobbys" :for="item">
+                <input type="checkbox" :value="item" v-model="hobbys">{{item}}
+            </label>
+        </div>
+    </div>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                message: '你好',
+                sex: '男',
+                isagree: false,
+                hobbys: [],
+                origanHobbys:['篮球','足球','乒乓球','羽毛球','保龄球','高尔夫球']
+            },
+            methods: {
+                onchange(event){
+                    this.message = event.target.value;
+                }
+            }
+        })
+        let nums = [10,20,200,100,50,20];
+        let total = nums.filter(function(n){
+            return n < 100;
+        }).map(function(n){
+            return n * 2;
+        }).reduce(function(prival, n){
+            return prival + n;
+        }, 0)
+
+        console.log(total)
+
+        let total2 = nums.filter( n => n < 100 ).map(n => n * 2).reduce((pre, n) => pre + n)
+        console.log(total2)
+    </script>
+</body>
+</html>
